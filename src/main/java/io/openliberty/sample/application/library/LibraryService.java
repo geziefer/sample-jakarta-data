@@ -72,7 +72,7 @@ public class LibraryService {
     @GET
     @Path("/query")
     @Produces(MediaType.APPLICATION_JSON)
-    public String query(@QueryParam("no") int number) {
+    public List<Book> query(@QueryParam("no") int number) {
         List<Book> result = switch (number) {
             case 1 -> library.findBookByPublishYear(1979);
             case 2 -> library.findBookByPublishYearBetween(1950, 1954);
@@ -83,6 +83,6 @@ public class LibraryService {
             default -> new ArrayList<>();
         };
 
-        return JsonbBuilder.create().toJson(result);
+        return result;
     }
 }
